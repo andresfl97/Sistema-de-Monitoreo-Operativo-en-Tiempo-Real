@@ -216,3 +216,39 @@ Para evolucionar hacia una arquitectura de datos empresarial, se plantea el sigu
 - [ ] **Dashboards Avanzados:** Implementación de filtros dinámicos y segmentación temporal en Looker Studio.
 - [ ] **Automatización ETL:** Programación de procesos automáticos de limpieza y transformación del dato.
 - [ ] **Gobierno del Dato:** Fortalecimiento de trazabilidad, calidad y consistencia analítica.
+
+---
+
+## 🧰 Reproducibilidad (código)
+
+Los resultados publicados en este documento pueden reproducirse localmente con los scripts del repositorio:
+
+```
+# 1. (Opcional) Regenerar el dataset de ejemplo
+python etl/generar_datos.py --check
+
+# 2. ETL: limpieza, calidad de datos y marca de sesgo de captura
+python etl/etl_clean.py
+
+# 3. Análisis: reproduce los KPIs del README y compara contra ellos
+python etl/analisis_insights.py
+```
+
+| Artefacto | Descripción |
+|---|---|
+| `data/encuestas_isp.csv` | Dataset de ejemplo (sintético, consistente con las métricas publicadas) |
+| `etl/generar_datos.py` | Generación reproducible del dataset (semilla fija) |
+| `etl/etl_clean.py` | Normalización, control de calidad y detección del sesgo de captura (GIGO) |
+| `etl/analisis_insights.py` | Reproducción de los KPIs del README |
+| `db/schema.sql` | Esquema PostgreSQL propuesto (paso de migración del roadmap) |
+| `db/analytics_queries.sql` | Consultas analíticas con CTEs y window functions |
+
+> **Nota sobre el dataset:** `encuestas_isp.csv` es sintético y se publica únicamente con fines de demostración y reproducibilidad. Mantiene la estructura y los patrones del caso real (anonimizado y seudonimizado según LOPDP), de modo que los KPIs del README se reproducen con diferencias menores de redondeo.
+
+---
+
+## 🧭 Contexto y origen del proyecto
+
+Este caso nació de la experiencia directa en la operación FTTH/GPON de un ISP. La operación carecía de visibilidad sobre el desempeño de contratistas, los tiempos de atención y la experiencia del cliente; ante esa brecha se diseñó e implementó este sistema de monitoreo.
+
+El proyecto se construyó de forma autónoma durante un periodo de trabajo en oficina y, tras demostrar su valor operativo, marcó la orientación profesional del autor hacia el análisis de datos y la automatización.
